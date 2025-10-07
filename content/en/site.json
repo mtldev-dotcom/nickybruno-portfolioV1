@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "title": "Nicky Bruno — Developer, Designer & AI Automation Expert",
+    "description": "Montreal-based developer and designer helping teams ship performant products, multilingual websites, and AI automations.",
+    "keywords": [
+      "Next.js developer",
+      "AI automation expert",
+      "bilingual product designer",
+      "Montreal tech consultant"
+    ],
+    "author": "Nicky Bruno",
+    "siteName": "nickybruno.com"
+  },
+  "navigation": [
+    {
+      "label": "Work",
+      "href": "/en/projects"
+    },
+    {
+      "label": "Services",
+      "href": "/en/services"
+    },
+    {
+      "label": "About",
+      "href": "/en/about"
+    },
+    {
+      "label": "Contact",
+      "href": "/en/contact"
+    }
+  ],
+  "footer": {
+    "copyright": "© {{year}} Nicky Bruno. All rights reserved.",
+    "socials": [
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/nickybruno/"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/nickybruno"
+      },
+      {
+        "label": "Dribbble",
+        "href": "https://dribbble.com/nickybruno"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Tell me about your next launch",
+    "description": "Share where you are today and where you want to go next. I usually reply within one business day.",
+    "form": {
+      "nameLabel": "Full name",
+      "emailLabel": "Work email",
+      "companyLabel": "Company or team",
+      "projectLabel": "What would you like to build?",
+      "budgetLabel": "Budget range",
+      "budgetOptions": [
+        "Under $10k",
+        "$10k – $25k",
+        "$25k – $50k",
+        "$50k+"
+      ],
+      "submitLabel": "Send message"
+    },
+    "success": {
+      "title": "Thank you!",
+      "description": "Your message was sent. I’ll be in touch very soon."
+    },
+    "error": {
+      "title": "Something went wrong",
+      "description": "Please try again or email hello@nickybruno.com."
+    }
+  }
+}

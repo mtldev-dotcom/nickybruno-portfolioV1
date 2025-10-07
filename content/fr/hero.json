@@ -1,0 +1,26 @@
+{
+  "title": "Design • Code • Automatisation",
+  "subtitle": "Concevoir des expériences rapides et bilingues propulsées par l’IA.",
+  "primaryCta": {
+    "label": "Voir mes projets",
+    "href": "/fr/projects"
+  },
+  "secondaryCta": {
+    "label": "Planifier un appel découverte",
+    "href": "mailto:hello@nickybruno.com"
+  },
+  "highlights": [
+    {
+      "label": "Années à livrer des produits",
+      "value": "12+"
+    },
+    {
+      "label": "Projets lancés",
+      "value": "80+"
+    },
+    {
+      "label": "Heures automatisées",
+      "value": "4 000+"
+    }
+  ]
+}

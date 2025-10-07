@@ -1,0 +1,26 @@
+{
+  "title": "Design • Code • Automation",
+  "subtitle": "Building fast, bilingual experiences powered by AI.",
+  "primaryCta": {
+    "label": "See my work",
+    "href": "/en/projects"
+  },
+  "secondaryCta": {
+    "label": "Book a discovery call",
+    "href": "mailto:hello@nickybruno.com"
+  },
+  "highlights": [
+    {
+      "label": "Years shipping digital products",
+      "value": "12+"
+    },
+    {
+      "label": "Projects launched",
+      "value": "80+"
+    },
+    {
+      "label": "Automation hours saved",
+      "value": "4,000+"
+    }
+  ]
+}

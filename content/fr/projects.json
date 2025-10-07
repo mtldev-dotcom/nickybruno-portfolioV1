@@ -1,0 +1,60 @@
+{
+  "title": "Projets choisis",
+  "intro": "Chaque mandat marie stratégie, design et ingénierie pour générer des résultats mesurables.",
+  "filters": [
+    {
+      "key": "all",
+      "label": "Tous les projets"
+    },
+    {
+      "key": "ai-automation",
+      "label": "Automatisation IA"
+    },
+    {
+      "key": "product",
+      "label": "Design produit"
+    },
+    {
+      "key": "web",
+      "label": "Développement web"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Sofia AI Desk",
+      "slug": "sofia-ai-desk",
+      "year": 2025,
+      "tags": ["Automatisation IA", "Opérations", "Agents augmentés"],
+      "excerpt": "Automatisation du tri et de l’acheminement des connaissances pour une équipe de soutien de 150 personnes grâce à des agents RAG.",
+      "category": "ai-automation",
+      "theme": {
+        "background": "radial-gradient(circle at 25% 25%, rgba(102,255,0,0.8), rgba(12,12,12,0.95))",
+        "foreground": "#e9ffe5"
+      }
+    },
+    {
+      "title": "Next X Level",
+      "slug": "next-x-level",
+      "year": 2024,
+      "tags": ["Next.js", "Stratégie produit", "Système de design"],
+      "excerpt": "Refonte du site de croissance avec bibliothèque multilingue, tests automatisés et flux CMS.",
+      "category": "web",
+      "theme": {
+        "background": "linear-gradient(140deg, rgba(8,8,8,0.95), rgba(100,255,188,0.45))",
+        "foreground": "#f0fffa"
+      }
+    },
+    {
+      "title": "Lumicerra Labs",
+      "slug": "lumicerra-labs",
+      "year": 2023,
+      "tags": ["Design produit", "IoT", "Analytique"],
+      "excerpt": "Conception et livraison d’un tableau de bord pour surveiller la logistique LiDAR avec insights prédictifs.",
+      "category": "product",
+      "theme": {
+        "background": "linear-gradient(130deg, rgba(8,12,40,0.9), rgba(102,255,0,0.4))",
+        "foreground": "#e6f4ff"
+      }
+    }
+  ]
+}

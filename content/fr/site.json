@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "title": "Nicky Bruno — Développeur, Designer & Expert en automatisation IA",
+    "description": "Consultant basé à Montréal aidant les équipes à lancer des produits performants, des sites bilingues et des automatisations IA.",
+    "keywords": [
+      "Développeur Next.js",
+      "Expert automatisation IA",
+      "Designer produit bilingue",
+      "Consultant tech Montréal"
+    ],
+    "author": "Nicky Bruno",
+    "siteName": "nickybruno.com"
+  },
+  "navigation": [
+    {
+      "label": "Projets",
+      "href": "/fr/projects"
+    },
+    {
+      "label": "Services",
+      "href": "/fr/services"
+    },
+    {
+      "label": "À propos",
+      "href": "/fr/about"
+    },
+    {
+      "label": "Contact",
+      "href": "/fr/contact"
+    }
+  ],
+  "footer": {
+    "copyright": "© {{year}} Nicky Bruno. Tous droits réservés.",
+    "socials": [
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/nickybruno/"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/nickybruno"
+      },
+      {
+        "label": "Dribbble",
+        "href": "https://dribbble.com/nickybruno"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Parlez-moi de votre prochain lancement",
+    "description": "Partagez votre situation actuelle et votre destination. Je réponds habituellement en moins d’un jour ouvrable.",
+    "form": {
+      "nameLabel": "Nom complet",
+      "emailLabel": "Courriel professionnel",
+      "companyLabel": "Entreprise ou équipe",
+      "projectLabel": "Que souhaitez-vous construire ?",
+      "budgetLabel": "Budget approximatif",
+      "budgetOptions": [
+        "Moins de 10 000 $",
+        "10 000 $ – 25 000 $",
+        "25 000 $ – 50 000 $",
+        "50 000 $ et plus"
+      ],
+      "submitLabel": "Envoyer"
+    },
+    "success": {
+      "title": "Merci !",
+      "description": "Votre message a été envoyé. Je vous répondrai très bientôt."
+    },
+    "error": {
+      "title": "Une erreur est survenue",
+      "description": "Veuillez réessayer ou écrivez à hello@nickybruno.com."
+    }
+  }
+}

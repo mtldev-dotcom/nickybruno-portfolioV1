@@ -1,0 +1,40 @@
+{
+  "title": "What I Do",
+  "intro": "Pairing product strategy with technical execution to launch performant, human-centered experiences.",
+  "services": [
+    {
+      "name": "AI Automation Sprints",
+      "description": "Map high-impact workflows, connect data, and automate operations with bespoke AI tooling.",
+      "deliverables": [
+        "Workflow audit & opportunity report",
+        "Custom GPT or agent build-out",
+        "Systems integration & training"
+      ],
+      "badge": "4-week program"
+    },
+    {
+      "name": "Web Experience Design & Build",
+      "description": "Design systems, prototypes, and ship production-ready interfaces using modern frameworks.",
+      "deliverables": [
+        "Interactive prototypes & design tokens",
+        "Responsive Next.js implementation",
+        "Performance & accessibility instrumentation"
+      ],
+      "badge": "Design + Dev"
+    },
+    {
+      "name": "Technical Partnerships",
+      "description": "Long-term engagements to evolve products, maintain infrastructure, and coach internal teams.",
+      "deliverables": [
+        "Roadmap & backlog stewardship",
+        "Feature delivery & QA automation",
+        "Team mentoring & knowledge base"
+      ],
+      "badge": "Fractional"
+    }
+  ],
+  "cta": {
+    "label": "Start a project",
+    "href": "/en/contact"
+  }
+}

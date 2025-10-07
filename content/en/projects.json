@@ -1,0 +1,60 @@
+{
+  "title": "Selected Projects",
+  "intro": "Each engagement blends strategy, design, and engineering to deliver measurable outcomes.",
+  "filters": [
+    {
+      "key": "all",
+      "label": "All work"
+    },
+    {
+      "key": "ai-automation",
+      "label": "AI automation"
+    },
+    {
+      "key": "product",
+      "label": "Product design"
+    },
+    {
+      "key": "web",
+      "label": "Web development"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Sofia AI Desk",
+      "slug": "sofia-ai-desk",
+      "year": 2025,
+      "tags": ["AI Automation", "Operations", "Agentic Workflows"],
+      "excerpt": "Automated triage and knowledge routing for a 150-person support team, powered by retrieval-augmented agents.",
+      "category": "ai-automation",
+      "theme": {
+        "background": "radial-gradient(circle at 25% 25%, rgba(102,255,0,0.8), rgba(12,12,12,0.95))",
+        "foreground": "#e9ffe5"
+      }
+    },
+    {
+      "title": "Next X Level",
+      "slug": "next-x-level",
+      "year": 2024,
+      "tags": ["Next.js", "Product Strategy", "Design Systems"],
+      "excerpt": "Rebuilt the growth marketing site with a multilingual component library, automated testing, and CMS workflows.",
+      "category": "web",
+      "theme": {
+        "background": "linear-gradient(140deg, rgba(8,8,8,0.95), rgba(100,255,188,0.45))",
+        "foreground": "#f0fffa"
+      }
+    },
+    {
+      "title": "Lumicerra Labs",
+      "slug": "lumicerra-labs",
+      "year": 2023,
+      "tags": ["Product Design", "IoT", "Analytics"],
+      "excerpt": "Designed and shipped a cloud dashboard for monitoring Lidar-powered logistics with predictive insights.",
+      "category": "product",
+      "theme": {
+        "background": "linear-gradient(130deg, rgba(8,12,40,0.9), rgba(102,255,0,0.4))",
+        "foreground": "#e6f4ff"
+      }
+    }
+  ]
+}

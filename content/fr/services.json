@@ -1,0 +1,40 @@
+{
+  "title": "Mes services",
+  "intro": "Allier stratégie produit et exécution technique pour lancer des expériences performantes et humaines.",
+  "services": [
+    {
+      "name": "Sprints d’automatisation IA",
+      "description": "Cartographier les flux critiques, connecter vos données et automatiser les opérations avec des outils IA sur mesure.",
+      "deliverables": [
+        "Audit des flux et rapport d’opportunités",
+        "Conception d’assistants ou d’agents personnalisés",
+        "Intégration des systèmes et formation"
+      ],
+      "badge": "Programme de 4 semaines"
+    },
+    {
+      "name": "Design & développement Web",
+      "description": "Systèmes de design, prototypes et interfaces prêtes pour la production avec des frameworks modernes.",
+      "deliverables": [
+        "Prototypes interactifs et design tokens",
+        "Implémentation responsive Next.js",
+        "Instrumentation performance & accessibilité"
+      ],
+      "badge": "Design + Dev"
+    },
+    {
+      "name": "Partenariats techniques",
+      "description": "Accompagnement long terme pour faire évoluer vos produits, maintenir l’infrastructure et coacher vos équipes.",
+      "deliverables": [
+        "Pilotage de roadmap et backlog",
+        "Livraison des fonctionnalités & QA automatisée",
+        "Mentorat d’équipe & base de connaissances"
+      ],
+      "badge": "Fractionné"
+    }
+  ],
+  "cta": {
+    "label": "Démarrer un projet",
+    "href": "/fr/contact"
+  }
+}
