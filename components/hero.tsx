@@ -27,7 +27,7 @@ export function Hero({ title, subtitle, primaryCta, secondaryCta, highlights = [
   const studioLabel = pillLabel ?? (locale === "fr" ? "Studio num\u00E9rique" : "Digital Studio");
 
   return (
-    <section className="relative overflow-hidden rounded-3xl border border-border/60 bg-card px-6 py-16 shadow-[0_10px_80px_-40px_rgba(102,255,0,0.55)] sm:px-10 md:px-16 md:py-24">
+    <section className="relative overflow-hidden rounded-3xl border border-border/60 bg-card px-6 py-16 shadow-[0_10px_80px_-40px_rgba(var(--brand-green),0.5),0_12px_90px_-50px_rgba(var(--brand-blue),0.35)] sm:px-10 md:px-16 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ export function Hero({ title, subtitle, primaryCta, secondaryCta, highlights = [
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4, duration: 0.6 }}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(102,255,0,0.15),_transparent_55%)]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(var(--brand-green),0.15),_transparent_55%),radial-gradient(circle_at_80%_10%,_rgba(var(--brand-blue),0.12),_transparent_55%)]"
       />
     </section>
   );

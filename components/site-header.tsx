@@ -34,12 +34,12 @@ export function SiteHeader({ locale, navigation, primaryCtaLabel }: SiteHeaderPr
         
         <div className="flex items-center py-5 gap-3">
           <LanguageToggle locale={locale} availableLocales={[...locales]} />
-          <AnimatedThemeToggler className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition hover:bg-primary/10 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" />
+          <AnimatedThemeToggler className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition hover:bg-primary/10 hover:text-foreground hover:shadow-[0_0_12px_rgba(var(--brand-blue),0.35),0_0_10px_rgba(var(--brand-green),0.3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" />
           
           {/* Desktop CTA */}
           <Link
             href={findPrimaryCta(navigation, locale)}
-            className="hidden rounded-full border border-primary/50 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary shadow-[0_0_0_1px_rgba(102,255,0,0.25)] transition hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 lg:inline-flex"
+            className="hidden rounded-full border border-primary/50 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary shadow-[0_0_20px_rgba(var(--brand-green),0.25),0_0_24px_rgba(var(--brand-blue),0.2),0_0_0_1px_rgba(var(--brand-green),0.35)] transition hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 lg:inline-flex"
           >
             {ctaLabel}
           </Link>
@@ -73,7 +73,7 @@ export function SiteHeader({ locale, navigation, primaryCtaLabel }: SiteHeaderPr
             <Link
               href={findPrimaryCta(navigation, locale)}
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-2 rounded-full border border-primary/50 bg-primary/10 px-4 py-3 text-center text-sm font-semibold text-primary shadow-[0_0_0_1px_rgba(102,255,0,0.25)] transition hover:bg-primary hover:text-primary-foreground"
+              className="mt-2 rounded-full border border-primary/50 bg-primary/10 px-4 py-3 text-center text-sm font-semibold text-primary shadow-[0_0_20px_rgba(var(--brand-green),0.25),0_0_24px_rgba(var(--brand-blue),0.2),0_0_0_1px_rgba(var(--brand-green),0.35)] transition hover:bg-primary hover:text-primary-foreground"
             >
               {ctaLabel}
             </Link>

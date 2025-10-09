@@ -75,7 +75,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <SiteHeader locale={locale} navigation={site.navigation} primaryCtaLabel={site.labels?.headerCta} />
-      <main className="flex-1 bg-[radial-gradient(circle_at_top,_rgba(102,255,0,0.04),_transparent_60%)]">
+      <main className="flex-1 bg-[radial-gradient(circle_at_top,_rgba(var(--brand-green),0.05),_transparent_60%),radial-gradient(circle_at_80%_10%,_rgba(var(--brand-blue),0.06),_transparent_55%)]">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 py-12 sm:px-10 md:py-20">{children}</div>
       </main>

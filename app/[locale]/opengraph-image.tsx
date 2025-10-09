@@ -44,7 +44,7 @@ export default async function OpenGraphImage({ params }: OpenGraphImageProps) {
           height: "100%",
           padding: "64px",
           backgroundColor: "#050505",
-          backgroundImage: "radial-gradient(circle at top, rgba(102,255,0,0.35), transparent 60%)",
+          backgroundImage: "radial-gradient(circle at 20% 10%, rgba(102,255,0,0.35), transparent 60%), radial-gradient(circle at 80% 20%, rgba(0,183,255,0.25), transparent 55%)",
           color: "white",
           fontFamily: "Inter, Arial, sans-serif",
         }}

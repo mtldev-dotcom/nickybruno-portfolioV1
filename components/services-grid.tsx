@@ -31,7 +31,7 @@ export function ServicesGrid({ title, intro, services, cta }: ServicesGridProps)
           <article
             key={service.name}
             className={cn(
-              "flex h-full flex-col justify-between rounded-3xl border border-border/60 bg-card/80 p-6 shadow-[0_25px_60px_-40px_rgba(102,255,0,0.55)] transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_35px_90px_-50px_rgba(102,255,0,0.65)]",
+              "flex h-full flex-col justify-between rounded-3xl border border-border/60 bg-card/80 p-6 shadow-[0_25px_60px_-40px_rgba(var(--brand-green),0.5),0_28px_70px_-50px_rgba(var(--brand-blue),0.35)] transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_35px_90px_-50px_rgba(var(--brand-green),0.6),0_38px_100px_-60px_rgba(var(--brand-blue),0.4)]",
               index === 0 ? "md:translate-y-4" : "",
               index === services.length - 1 ? "md:-translate-y-4" : "",
             )}

@@ -60,7 +60,7 @@ export function LanguageToggle({ locale, availableLocales }: LanguageToggleProps
             disabled={pending || isActive}
             className={`rounded-full px-2.5 py-1 transition ${
               isActive
-                ? "bg-primary text-primary-foreground shadow-[0_0_0_1px_rgba(102,255,0,0.4)]"
+                ? "bg-primary text-primary-foreground shadow-[0_0_12px_rgba(var(--brand-blue),0.28),0_0_0_1px_rgba(var(--brand-green),0.45)]"
                 : "text-muted-foreground hover:text-foreground"
             } ${pending ? "opacity-60" : ""}`}
             aria-pressed={isActive}
