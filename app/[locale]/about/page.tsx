@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!isLocale(locale)) {
     return {};
   }
-  const [about, site] = await Promise.all([getAboutContent(locale), getSiteContent(locale)]);
+  const [about/* , site */] = await Promise.all([getAboutContent(locale), getSiteContent(locale)]);
   const title = (about.frontmatter?.title as string | undefined) ?? (locale === "fr" ? "\u00C0 propos" : "About");
   const tagline =
     (about.frontmatter?.tagline as string | undefined) ??

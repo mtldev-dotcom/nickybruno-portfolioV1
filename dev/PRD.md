@@ -1,39 +1,40 @@
 # Build Plan for nickybruno.com (Portfolio, EN/FR)
 
-> **Purpose**: This file is a **single source of truth** for Cline to scaffold, implement, and ship the **nickybruno.com** portfolio website. Follow it top‑to‑bottom. Produce clean, commented code, consistent styling, and a bilingual experience (**English & Français**).
+> Purpose: This file is a single source of truth for scaffolding, implementing, and shipping the nickybruno.com portfolio website. It reflects the current implementation and the plan forward. All text should be sourced from content/{locale} to support localization.
 
 ---
 
 ## 0) Project Overview
 
-- **Brand**: Nicky Bruno — developer • designer • AI automation
-- **Goal**: A fast, elegant, bilingual portfolio that showcases projects, services, and contact funnels.
-- **Tone**: Modern, minimal, confident; focus on **clarity**, **motion micro‑interactions**, and **readability**.
-- **Must‑haves**:
-  - Next.js 15 (App Router), TypeScript, Tailwind, shadcn/ui
-  - i18n (EN/FR) with route‑aware language toggle
-  - Responsive, Lighthouse 95+ (Perf/SEO/Best/Access)
-  - Structured data (JSON‑LD), OG/Twitter cards
-  - Simple content system (MDX or flat JSON) with easy extension
-  - Contact form → email (resend) + Telegram (optional webhooks)
-  - Analytics (Plausible or Vercel), basic consent banner
-  - Deployed on Vercel; preview branches enabled
+- Brand: Nicky Bruno — developer • designer • automation & AI
+- Goal: A fast, elegant, bilingual portfolio that showcases projects, services, and contact funnels.
+- Tone: Modern, minimal, confident; focus on clarity, micro‑interactions, and readability.
+- Must‑haves (as implemented):
+  - Next.js 15 (App Router), TypeScript, Tailwind v4
+  - i18n (EN/FR) via App Router + middleware with route‑aware language toggle
+  - Responsive/mobile‑first layouts
+  - Structured data (JSON‑LD), Open Graph images
+  - Simple content system (MDX + JSON) with easy extension
+  - Contact form with zod validation and Resend email delivery
+  - Analytics ready (Plausible or Vercel Analytics), consent banner optional
+  - Deployed on Vercel; preview branches recommended
 
 ---
 
 ## 1) Tech Stack & Libraries
 
-- **Framework**: Next.js 15 (App Router) + TypeScript
-- **Styling**: Tailwind CSS + shadcn/ui (radix primitives), lucide-react
-- **Content**: MDX or JSON per locale (`/content/en`, `/content/fr`)
-- **i18n**: `next-intl` (route groups) or `next-international` (lightweight); prefer **next-intl**
-- **Forms**: `react-hook-form`, `zod` validation; delivery via **resend** (email) and optional webhook (Telegram)
-- **Animations**: `framer-motion`
-- **Images**: Next/Image with remote patterns + blur placeholders
-- **Icons**: `lucide-react`
-- **Analytics**: Plausible (cookieless) or Vercel Analytics
-- **SEO**: `next-seo` or native Next.js metadata, plus JSON‑LD helpers
-- **Testing**: Playwright (smoke + a11y), Vitest (units for utils)
+- Framework: Next.js 15 (App Router), React 19
+- Language: TypeScript
+- Styling: Tailwind CSS v4; utility‑first components (no shadcn in use yet)
+- Content: MDX (next‑mdx‑remote/rsc) + JSON per locale (content/en, content/fr)
+- i18n: App Router localized routes `/[locale]/*` + middleware.ts; locale utilities in lib/locales.ts
+- Forms: zod schema (lib/schemas/contact.ts); POST /api/contact; email via Resend
+- Animation: framer‑motion
+- Icons: lucide‑react
+- SEO: Native Next.js metadata APIs + JSON‑LD in layout; Open Graph image route per locale
+- Tooling: ESLint v9, Tailwind v4, pnpm
+
+Note: We do not use next‑intl; labels and UI strings live under site.json to simplify localization.
 
 ---
 
@@ -41,165 +42,240 @@
 
 ```
 /[locale]/
-  ├─ (public)
-  │   ├─ page.tsx                  → Home (hero, value prop, CTA)
-  │   ├─ projects/page.tsx         → Work index (filters, tags)
-  │   ├─ projects/[slug]/page.tsx  → Case study (MDX)
-  │   ├─ services/page.tsx         → Services & pricing
-  │   ├─ about/page.tsx            → Bio + timeline + skills
-  │   ├─ contact/page.tsx          → Contact form + links
-  │   └─ legal/(privacy|terms).tsx → Optional
-  └─ api/contact/route.ts          → POST handler (resend + webhook)
+  page.tsx                      → Home (hero, highlights, services, about glimpse, contact)
+  /projects/page.tsx            → Work index (filters, cards)
+  /projects/[slug]/page.tsx     → Case study (MDX)
+  /services/page.tsx            → Services (grid + collaboration section)
+  /about/page.tsx               → Bio + timeline + skills (MDX + frontmatter)
+  /contact/page.tsx             → Contact form (copy fully from content)
+  opengraph-image.tsx           → Localized Open Graph image
+/api
+  /contact/route.ts             → Resend integration (POST)
+  /locale/route.ts              → Sets NEXT_LOCALE cookie
 ```
 
-- **Locales**: `/en` and `/fr` are primary. Default: **/en**.  
-- **Switch**: Language toggle persists chosen locale and routes accordingly.
+- Locales: /en and /fr. Default: en.
+- Language toggle persists chosen locale and routes accordingly (components/language-toggle.tsx).
 
 ---
 
 ## 3) Content Model
 
-### 3.1 MDX/JSON structure
+Directory structure:
 ```
 /content
   /en
     hero.json
-    about.mdx
     services.json
     projects.json
-    projects/
-      sofia.mdx
+    site.json
+    about.mdx
+    /projects
+      sofia-ai-desk.mdx
       next-x-level.mdx
-      lumicerra.mdx
+      lumicerra-labs.mdx
   /fr
     hero.json
-    about.mdx
     services.json
     projects.json
-    projects/
-      sofia.mdx
+    site.json
+    about.mdx
+    /projects
+      sofia-ai-desk.mdx
       next-x-level.mdx
-      lumicerra.mdx
+      lumicerra-labs.mdx
 ```
 
-- `hero.json`: title, subtitle, bullets, primaryCTAText, primaryCTAUrl, logos (if any)
-- `services.json`: cards (title, bullets, fromPrice), FAQs (q/a)
-- `projects.json`: lightweight list (title, slug, excerpt, tags, cover, year, featured)
-- Individual `projects/*.mdx`: long‑form case study with front‑matter `{ title, date, tags, cover, roles }`
+Current JSON shapes (EN):
 
-> **Claude**: Implement a small **content loader** that reads per‑locale file; add types; fallback to EN if missing keys in FR.
+- hero.json
+```json
+{
+  "title": "I build digital systems that make your business run smoother — and look good doing it.",
+  "subtitle": "From websites and automation to design and marketing — I help you work smarter, not harder.",
+  "primaryCta": { "label": "See my work", "href": "/en/projects" },
+  "secondaryCta": { "label": "Let’s talk", "href": "mailto:hello@nickybruno.com" },
+  "highlights": [
+    { "label": "years in creative & tech industries", "value": "20+" },
+    { "label": "completed projects across Canada", "value": "80+" },
+    { "label": "hours saved through automation", "value": "4,000+" }
+  ]
+}
+```
 
-### 3.2 Initial copy (seed)
-- Pull key phrasing from the user’s reports:
-  - **Value prop**: “Developer–designer building fast, automated, bilingual experiences powered by AI.”
-  - **Tagline alt**: “Design ✦ Code ✦ Automation”
-  - **Bio short**: “20+ years shipping web, AI agents, and automation for brands and founders.”
-  - **Focus**: Next.js, Supabase, n8n, AI agents, design systems, brand UX.
+- services.json
+```json
+{
+  "title": "Services",
+  "intro": "Every engagement blends strategy, design, and technology — focused on saving you time, boosting visibility, and building trust.",
+  "services": [
+    { "name": "Digital Foundations", "description": "...", "deliverables": ["..."], "badge": "Web" },
+    { "name": "Automation & Efficiency", "description": "...", "deliverables": ["..."], "badge": "Ops" },
+    { "name": "Branding & Graphic Design", "description": "...", "deliverables": ["..."], "badge": "Design" },
+    { "name": "Consulting & Training", "description": "...", "deliverables": ["..."], "badge": "Advisory" }
+  ],
+  "collaboration": {
+    "heading": "Collaboration approach",
+    "copy": "Every engagement starts with understanding your goals...",
+    "bullets": [
+      "Discovery workshops and critical workflow mapping",
+      "Interactive prototypes to align stakeholders",
+      "Incremental delivery with weekly reviews",
+      "Performance and accessibility instrumentation from day one"
+    ],
+    "ctaLabel": "Discuss a project"
+  },
+  "cta": { "label": "Start a project", "href": "/en/contact" }
+}
+```
+
+- projects.json
+```json
+{
+  "title": "Selected Projects",
+  "intro": "Each engagement blends strategy, design, and engineering to deliver measurable outcomes.",
+  "filters": [{ "key": "all", "label": "All work" }, ...],
+  "projects": [
+    {
+      "title": "Sofia AI Desk",
+      "slug": "sofia-ai-desk",
+      "year": 2025,
+      "tags": ["AI Automation", "Operations", "Agentic Workflows"],
+      "excerpt": "Automated customer support with a clear dashboard — ~60% faster responses.",
+      "category": "ai-automation",
+      "theme": { "background": "...", "foreground": "#e9ffe5" }
+    },
+    ...
+  ]
+}
+```
+
+- site.json (adds global labels and contact copy)
+```json
+{
+  "meta": { "title": "...", "description": "...", "keywords": ["..."], "author": "Nicky Bruno", "siteName": "nickybruno.com" },
+  "navigation": [{ "label": "Work", "href": "/en/projects" }, "..."],
+  "footer": {
+    "copyright": "© {{year}} Nicky Bruno...",
+    "socials": [{ "label": "LinkedIn", "href": "..." }, "..."]
+  },
+  "labels": {
+    "headerCta": "Let’s talk",
+    "heroPill": "Digital Studio",
+    "footerConnect": "Connect",
+    "projectsHeading": "Case Studies",
+    "home": {
+      "highlights": "Highlights",
+      "moreProjects": "View all projects",
+      "servicesCta": "See services",
+      "aboutCta": "Explore full journey"
+    },
+    "sections": { "about": "About", "services": "Services", "contact": "Contact" }
+  },
+  "contact": {
+    "sectionLabel": "Collaborate",
+    "title": "Let’s make your digital life easier.",
+    "description": "Tell me what you want to achieve — I’ll show you the smartest, simplest way to make it happen.",
+    "form": {
+      "nameLabel": "Full name",
+      "emailLabel": "Work email",
+      "companyLabel": "Company or team",
+      "projectLabel": "What would you like to build?",
+      "budgetLabel": "Budget range",
+      "budgetOptions": ["Under $10k", "$10k – $25k", "$25k – $50k", "$50k+"],
+      "submitLabel": "Send message"
+    },
+    "success": { "title": "Thank you!", "description": "Your message was sent. I’ll be in touch very soon." },
+    "error": { "title": "Something went wrong", "description": "Please try again or email hello@nickybruno.com." }
+  }
+}
+```
+
+- about.mdx
+  - Frontmatter: `title`, `tagline`, `stats[]`, `timeline[]`, `skills{}`.
+  - Body: human‑centered copy as implemented.
+
+Implementation detail: Pages include safe fallbacks for missing labels; no automatic cross‑locale file fallback is implemented in loaders.
 
 ---
 
 ## 4) Visual System
 
-- **Typography**: Inter (UI), Space Grotesk or Geist for display (H1/Hero)
-- **Color**: Base neutral (zinc/stone). Accent: **electric green `#66FF00`** (brand nod), with accessible contrasts.
-- **Layout**: Grid, generous white space, max‑width `max-w-6xl`, 4/6/12 columns responsive
-- **Cards**: soft shadows, rounded‑2xl, subtle borders (`border-white/10` on dark or `border-black/10` on light)
-- **Motion**: micro‑interactions on hover/focus; modest parallax in hero; animate section entrances with `framer-motion`
+- Typography: Inter for UI; strong hierarchy; balanced line‑length for readability
+- Color: Dark base, mint accent (#66FF00) with accessible contrasts
+- Layout: max‑width `max-w-6xl`; mobile‑first stacks; subtle borders/shadows
+- Motion: framer‑motion micro‑interactions; gentle reveal; hover elevation
 
 ---
 
-## 5) Components (shadcn/ui + custom)
+## 5) Components (Current)
 
-- `Navbar` (locale‑aware + LanguageToggle)
-- `Footer` (links, socials)
-- `Hero` (headline, sub, CTA, motion)
-- `ProjectCard` (image, tags, year, link)
-- `ProjectGallery` (masonry/grid w/ filters by tag)
-- `MDXContent` (prose styles)
-- `Stats` (years, shipped projects, stack logos)
-- `ServicesGrid` (cards + CTA)
-- `ContactForm` (zod schema → /api/contact; success/failure UI)
-- `LanguageToggle` (switch locale, keep path)
-- `ThemeToggle` (light/dark, optional)
-- `Badge` for tags (e.g., Next.js, Supabase, n8n, AI)
-
-> **Claude**: Generate these as isolated components in `/components` and `/components/ui`, using shadcn conventions.
+- SiteHeader (locale aware; primary CTA label from site.json)
+- LanguageToggle (route‑aware)
+- Hero (pill label from site.json; CTA from hero.json)
+- ServicesGrid
+- ProjectCard / ProjectGallery
+- StatsRibbon / Timeline
+- ContactForm (title/desc/labels/success/error from site.json)
+- SiteFooter (connect label from site.json)
+- MDX rendering via lib/mdx-components.tsx
 
 ---
 
 ## 6) SEO & Analytics
 
-- **Metadata**: per‑page via `generateMetadata` (title, description, locale alternates).
-- **OG**: Dynamic OG images using @vercel/og (title, tag, accent line).
-- **JSON‑LD**: `WebSite`, `Person` (Nicky Bruno), `BreadcrumbList` (project pages).
-- **Analytics**: Plausible or Vercel Analytics, + basic cookie notice.
+- Metadata via generateMetadata per route (layout, services, etc.)
+- JSON‑LD Person schema in layout
+- Open Graph image at app/[locale]/opengraph-image.tsx
+- Analytics: Plausible or Vercel Analytics (to be configured)
 
 ---
 
 ## 7) Forms / Integrations
 
-- **Email**: Resend transactional for contact form. Subject: `nickybruno.com :: new inquiry`
-- **Webhook (optional)**: Telegram Bot API; post summary message.
-- **Validation**: zod; rate‑limit (simple in‑memory or upstash‑ratelimit).
+- POST /api/contact accepts zod‑validated payload; sends email via Resend
+- Environment‑based configuration; graceful failure if missing envs
+- Optional: Telegram webhook (future)
 
 ---
 
 ## 8) Accessibility & Performance
 
-- a11y: skip‑to‑content, focus styles, aria labels, semantic headings, alt text, color contrast ≥ 4.5:1
-- perf: image optimization, no unused JS, edge runtime for stateless routes
-- budgets: first contentful paint < 1.8s on 4G; bundle size < 180kb JS on home
+- a11y: semantic headings, focus styles, ARIA attributes on icons where needed
+- perf: image optimization planned; avoid unused JS; lazy‑load media
+- budgets: FCP < 1.8s on 4G; keep client components minimal
 
 ---
 
-## 9) Commands (Claude: run sequentially)
+## 9) Commands
 
 ```bash
-# 1) Create app
-pnpm create next-app@latest nickybruno.com --typescript --eslint --tailwind --app --src-dir --import-alias "@/*"
-cd nickybruno.com
+# Install deps
+pnpm install
 
-# 2) Install deps
-pnpm add next-intl framer-motion next-seo class-variance-authority tailwind-merge lucide-react
-pnpm add -D @types/node @types/react @types/react-dom prettier playwright @playwright/test vitest @testing-library/react @testing-library/jest-dom @types/testing-library__jest-dom
+# Dev server
+pnpm dev
+# http://localhost:3000 (auto locale; /en is default)
 
-# 3) shadcn/ui
-pnpm dlx shadcn@latest init
-pnpm dlx shadcn@latest add button card badge input textarea navigation-menu accordion dialog
-
-# 4) Content & MDX
-pnpm add next-mdx-remote gray-matter
+# Production build
+pnpm run build
+pnpm start
 ```
 
 ---
 
-## 10) File/Folder Structure
+## 10) File/Folder Structure (Key)
 
 ```
-/src
-  /app
-    /(routes)
-      /[locale]
-        /(public)
-          page.tsx
-          /projects/page.tsx
-          /projects/[slug]/page.tsx
-          /services/page.tsx
-          /about/page.tsx
-          /contact/page.tsx
-        layout.tsx
-        head.tsx (if required)
-    /api/contact/route.ts
-  /components
-  /lib
-  /styles
-/content/{en,fr}/...
+app/[locale]/(pages...)     # localized routes
+app/api/(contact|locale)    # API routes
+components/**               # UI components
+content/{en,fr}/**          # JSON + MDX content
+lib/content.ts              # JSON/MDX loaders + types
+lib/locales.ts              # locale utilities
+middleware.ts               # locale routing
+public/**                   # assets
 ```
-
-- **/lib/i18n.ts**: next‑intl config + dictionaries loader
-- **/lib/seo.ts**: metadata + json‑ld helpers
-- **/lib/content.ts**: read MDX/JSON by locale
-- **/styles/globals.css**: Tailwind + prose styles
 
 ---
 
@@ -207,139 +283,81 @@ pnpm add next-mdx-remote gray-matter
 
 ```
 NEXT_PUBLIC_SITE_URL=https://nickybruno.com
-NEXT_PUBLIC_DEFAULT_LOCALE=en
 RESEND_API_KEY=...
-TELEGRAM_BOT_TOKEN=...            # optional
-TELEGRAM_CHAT_ID=...              # optional
-PLAUSIBLE_DOMAIN=nickybruno.com   # optional if using Plausible
+CONTACT_TO_EMAIL=you@your-domain.tld
 ```
 
-> **Claude**: Generate `.env.example` and never commit `.env.local`.
+Notes:
+- NEXT_PUBLIC_SITE_URL used for metadataBase and JSON‑LD canonicalization
+- Resend requires verified domain/from address
 
 ---
 
-## 12) Initial Content (seed)
+## 12) Current English Copy Seeds
 
-**Hero (EN)**  
-- Title: “Design ✦ Code ✦ Automation”  
-- Subtitle: “I build fast, bilingual experiences powered by AI.”  
-- CTA: “See my work” `/en/projects`
-
-**Hero (FR)**  
-- Title: “Design ✦ Code ✦ Automatisation”  
-- Subtitle: “Je conçois des expériences rapides et bilingues propulsées par l’IA.”  
-- CTA: “Voir mes projets” `/fr/projects`
-
-**Projects (seed)**  
-- Sofia Restaurant Management (AI receptionist, floor plan editor, Next.js + Supabase + n8n)  
-- Next X Level (bilingual e‑commerce, MedusaJS + Next.js)  
-- Lumicerra (architectural LED panels, dashboard + site)  
+- Hero: human‑centered headline, subtitle, CTAs, and highlights (see hero.json)
+- Services: four pillars + collaboration section (services.json)
+- Projects: simplified excerpts + filters (projects.json)
+- About: updated frontmatter and body (about.mdx)
+- Site: labels and contact copy (site.json)
 
 ---
 
 ## 13) Acceptance Criteria
 
-- [ ] Lighthouse ≥ 95 on mobile for Perf/SEO/Best/Access
-- [ ] i18n works across all routes with toggle
-- [ ] MDX case studies render with TOC, images, captions
-- [ ] Contact form validates and delivers via Resend
-- [ ] OG images generated per page
-- [ ] Deployed on Vercel with preview for PRs
-- [ ] a11y checks pass (Playwright + axe)
+- [ ] All visible UI text is driven by content/{locale} (JSON/MDX)
+- [ ] Lighthouse ≥ 95 mobile on Perf/SEO/Best/Access (post‑assets)
+- [ ] Contact form validates and sends via Resend
+- [ ] OG images generated per locale
+- [ ] Deployed on Vercel with preview branches
 
 ---
 
 ## 14) Deployment Steps (Vercel)
 
-1. `vercel init` or connect GitHub repo.
-2. Set environment variables.
-3. Configure `domains` → `nickybruno.com`.
-4. Protect `/preview` if needed with basic auth middleware.
-5. Run smoke tests on preview → merge → production.
+1. Connect GitHub repo to Vercel
+2. Set envs (NEXT_PUBLIC_SITE_URL, RESEND_API_KEY, CONTACT_TO_EMAIL)
+3. Build command: `pnpm run build`
+4. Serve command: `pnpm start` (handled by Vercel)
+5. Add domains and SSL
+6. Validate preview and promote to production
 
 ---
 
-## 15) Post‑Launch Enhancements (Optional)
+## 15) Post‑Launch Enhancements
 
-- Blog with MDX (tips: AI agents, n8n recipes, Supabase auth)
-- Newsletter (Buttondown or ConvertKit)
-- CMS bridge (Payload or Contentlayer) if content scales
-- Dark mode with system preference
-- Project filters persisted via search params
-- RSS feed for updates (`/feed.xml`)
+- Blog (MDX), newsletter (Buttondown/ConvertKit)
+- CMS bridge (Payload/Contentlayer) if content scales
+- Dark mode, theme toggle
+- More animations per Visual Production Checklist
+- Playwright smoke + axe a11y tests
+- Persisted filters and shareable project URLs
 
 ---
 
-## 16) Claude Execution Notes
+## 16) Execution Notes
 
-- Prefer **server components**; keep client components small.
-- Extract UI primitives with shadcn conventions.
-- Strong typing for content loaders (zod schemas).
-- Wrap external links with `rel="noopener noreferrer"`.
-- Write **docstrings & comments** for all exported functions/components.
-- Provide **Playwright** smoke tests for core flows:
-  - Navigate EN↔FR, open projects, submit contact (mock).
+- Prefer server components; keep client components focused
+- Strong typing for content loaders; graceful optional fallbacks in usage sites
+- Wrap external links with rel="noopener noreferrer"
+- MDX restricted to safe components; typography consistent
+- Provide Playwright smoke tests for EN/FR nav, projects, and contact (future)
 
 ---
 
 ## 17) Sample Snippets
 
-**Language Toggle (sketch)**
-```tsx
-"use client"
-import { usePathname } from "next/navigation"
-import Link from "next/link"
-
-export function LanguageToggle({ locale }: { locale: "en" | "fr" }) {
-  const pathname = usePathname()
-  const target = locale === "en" ? pathname.replace("/fr", "/en") : pathname.replace("/en", "/fr")
-  return (
-    <Link href={target} aria-label={locale === "en" ? "Français" : "English"} className="text-sm underline">
-      {locale === "en" ? "FR" : "EN"}
-    </Link>
-  )
-}
-```
-
-**Contact API route (sketch)**
-```ts
-// /src/app/api/contact/route.ts
-import { NextResponse } from "next/server"
-import { z } from "zod"
-
-const schema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  message: z.string().min(10),
-})
-
-export async function POST(req: Request) {
-  const body = await req.json()
-  const parsed = schema.safeParse(body)
-  if (!parsed.success) return NextResponse.json({ ok: false, errors: parsed.error.flatten() }, { status: 400 })
-
-  // TODO: send via Resend + optional Telegram webhook
-  return NextResponse.json({ ok: true })
-}
-```
+(See README for current API and component references; language toggle and contact API sketches remain valid.)
 
 ---
 
-## 18) Tasks Checklist (Claude runlist)
+## 18) Task Checklist (Runlist)
 
-1. **Scaffold** Next.js app, Tailwind, shadcn/ui, deps.  
-2. **Implement** i18n with `/[locale]` and language toggle.  
-3. **Create** content loaders and seed content (EN/FR).  
-4. **Build** core pages + components (Hero, Projects, Services, About, Contact).  
-5. **Wire** contact form (zod + Resend + optional Telegram).  
-6. **Add** SEO metadata, OG, JSON‑LD.  
-7. **Polish** motion, spacing, states (hover/focus/active).  
-8. **Write** tests (Playwright smoke + a11y).  
-9. **Configure** analytics + envs + Vercel deployment.  
-10. **Run** Lighthouse + fix; ship.
-
----
-
-## 19) Credits & Ownership
-
-- © Nicky Bruno. Source code licensed MIT unless specified. Brand assets are proprietary.
+1. Update EN content (done)
+2. Externalize UI labels (done)
+3. Wire pages/components to content (done)
+4. Mobile‑first QA at 320/375/414/768/1024 (pending)
+5. a11y pass (pending)
+6. Prepare FR stubs mirroring keys (pending)
+7. Add lightweight placeholders for visuals (optional)
+8. Configure analytics and envs for production (pending)

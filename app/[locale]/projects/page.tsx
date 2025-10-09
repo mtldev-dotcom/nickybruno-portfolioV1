@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!isLocale(locale)) {
     return {};
   }
-  const [listing, site] = await Promise.all([getProjects(locale), getSiteContent(locale)]);
+  const [listing/* , site */] = await Promise.all([getProjects(locale), getSiteContent(locale)]);
   return {
     title: `${listing.title} — Nicky Bruno`,
     description: listing.intro,

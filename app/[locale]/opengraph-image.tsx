@@ -21,7 +21,7 @@ export default async function OpenGraphImage({ params }: OpenGraphImageProps) {
     return new ImageResponse(<div />, size);
   }
 
-  const [hero, projects] = await Promise.all([getHero(locale), getProjects(locale)]);
+  const [hero /*, projects */] = await Promise.all([getHero(locale), getProjects(locale)]);
   const headline = typeof hero.title === "string" ? hero.title : "Nicky Bruno";
   const subtitle =
     typeof hero.subtitle === "string"
@@ -30,8 +30,8 @@ export default async function OpenGraphImage({ params }: OpenGraphImageProps) {
         ? "Designer \u2022 D\u00E9veloppeur \u2022 Expert en automatisation IA"
         : "Designer \u2022 Developer \u2022 AI Automation Expert";
 
-  const featuredProject = projects.projects[0];
-  const tags = Array.isArray(featuredProject?.tags) ? featuredProject?.tags.slice(0, 2) : [];
+  // const featuredProject = projects.projects[0];
+  // const tags = Array.isArray(featuredProject?.tags) ? featuredProject?.tags.slice(0, 2) : [];
 
   return new ImageResponse(
     (
@@ -63,7 +63,7 @@ export default async function OpenGraphImage({ params }: OpenGraphImageProps) {
           <h1 style={{ fontSize: 68, lineHeight: 1.05, margin: 0 }}>{headline}</h1>
           <p style={{ fontSize: 28, color: "rgba(255,255,255,0.72)", margin: 0 }}>{subtitle}</p>
         </div>
-        {featuredProject ? (
+        {/* {featuredProject ? (
           <div
             style={{
               display: "flex",
@@ -95,7 +95,7 @@ export default async function OpenGraphImage({ params }: OpenGraphImageProps) {
               <span>{tags.join(" \u2022 ")}</span>
             </div>
           </div>
-        ) : null}
+        ) : null} */}
       </div>
     ),
     size,
