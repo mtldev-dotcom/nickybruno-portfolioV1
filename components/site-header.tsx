@@ -9,6 +9,7 @@ import { locales } from "@/lib/locales";
 
 import { LanguageToggle } from "./language-toggle";
 import { SiteLogo } from "./site-logo";
+import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 
 type NavigationItem = {
   label: string;
@@ -26,13 +27,14 @@ export function SiteHeader({ locale, navigation, primaryCtaLabel }: SiteHeaderPr
   const ctaLabel = primaryCtaLabel ?? (locale === "fr" ? "Discutons" : "Let\u2019s talk");
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-white">
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-background">
       <div className="mx-auto flex max-w-9/10 items-center justify-between gap-6 px-6 py-0 sm:px-10">
-        <SiteLogo locale={locale} variant="light" />
+        <SiteLogo locale={locale} variant="auto" />
         
         
         <div className="flex items-center py-5 gap-3">
           <LanguageToggle locale={locale} availableLocales={[...locales]} />
+          <AnimatedThemeToggler className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition hover:bg-primary/10 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" />
           
           {/* Desktop CTA */}
           <Link
@@ -56,7 +58,7 @@ export function SiteHeader({ locale, navigation, primaryCtaLabel }: SiteHeaderPr
       
       {/* Mobile Menu Panel */}
       {mobileMenuOpen && (
-        <div className="border-t border-border/60 bg-black">
+        <div className="border-t border-border/60 bg-background">
           <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-6 py-4">
             {navigation.map((item) => (
               <Link
