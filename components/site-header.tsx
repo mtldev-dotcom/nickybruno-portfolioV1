@@ -26,24 +26,12 @@ export function SiteHeader({ locale, navigation, primaryCtaLabel }: SiteHeaderPr
   const ctaLabel = primaryCtaLabel ?? (locale === "fr" ? "Discutons" : "Let\u2019s talk");
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-black backdrop-blur-md backdrop-saturate-[180%]">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-5 sm:px-10">
-        <SiteLogo locale={locale} />
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-white">
+      <div className="mx-auto flex max-w-9/10 items-center justify-between gap-6 px-6 py-0 sm:px-10">
+        <SiteLogo locale={locale} variant="light" />
         
-        {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground lg:flex">
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="transition hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
         
-        <div className="flex items-center gap-3">
+        <div className="flex items-center py-5 gap-3">
           <LanguageToggle locale={locale} availableLocales={[...locales]} />
           
           {/* Desktop CTA */}
@@ -57,7 +45,7 @@ export function SiteHeader({ locale, navigation, primaryCtaLabel }: SiteHeaderPr
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition hover:bg-primary/10 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition hover:bg-primary/10 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
           >
@@ -68,7 +56,7 @@ export function SiteHeader({ locale, navigation, primaryCtaLabel }: SiteHeaderPr
       
       {/* Mobile Menu Panel */}
       {mobileMenuOpen && (
-        <div className="border-t border-border/60 bg-black lg:hidden">
+        <div className="border-t border-border/60 bg-black">
           <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-6 py-4">
             {navigation.map((item) => (
               <Link

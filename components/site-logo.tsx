@@ -3,22 +3,25 @@ import Link from "next/link";
 
 type SiteLogoProps = {
   locale: string;
+  variant?: "light" | "dark";
 };
 
-export function SiteLogo({ locale }: SiteLogoProps) {
+export function SiteLogo({ locale, variant = "dark" }: SiteLogoProps) {
+  const src = variant === "dark" ? "/logo-dark-mode.png" : "/logo-light-mode.png";
   return (
     <Link
       href={`/${locale}`}
-      className="group inline-flex items-center gap-3 transition hover:opacity-80"
+      className="group inline-flex items-center gap-3 transition"
       aria-label="Nicky Bruno - Home"
     >
       <Image
-        src="/logo_nicky_bruno.png"
+        src={src}
         alt="Nicky Bruno Logo"
-        width={120}
-        height={40}
-        className="h-10 w-auto"
+        width={426}
+        height={80}
+        className="max-h-22 w-auto py-1 opacity-100"
         priority
+        unoptimized
       />
     </Link>
   );

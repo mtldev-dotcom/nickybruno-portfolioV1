@@ -46,7 +46,25 @@
       }
     ]
   },
+  "labels": {
+    "headerCta": "Discutons",
+    "heroPill": "Studio numérique",
+    "footerConnect": "Contact direct",
+    "projectsHeading": "Études de cas",
+    "home": {
+      "highlights": "Sélection",
+      "moreProjects": "Voir tous les projets",
+      "servicesCta": "Voir les services",
+      "aboutCta": "Explorer le parcours complet"
+    },
+    "sections": {
+      "about": "À propos",
+      "services": "Services",
+      "contact": "Contact"
+    }
+  },
   "contact": {
+    "sectionLabel": "Collaborons",
     "title": "Parlez-moi de votre prochain lancement",
     "description": "Partagez votre situation actuelle et votre destination. Je réponds habituellement en moins d’un jour ouvrable.",
     "form": {
