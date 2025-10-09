@@ -3,7 +3,6 @@ import { Resend } from "resend";
 
 import { contactSchema } from "@/lib/schemas/contact";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 const CONTACT_TO = process.env.CONTACT_TO_EMAIL ?? process.env.RESEND_CONTACT_TO ?? process.env.NEXT_PUBLIC_CONTACT_TO;
 
 export async function POST(request: Request) {
@@ -28,10 +27,11 @@ export async function POST(request: Request) {
   const data = parsed.data;
 
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY!);
     await resend.emails.send({
       to: CONTACT_TO,
       from: "Nicky Bruno Portfolio <hello@nickybruno.com>",
-      replyTo: data.email,
+      reply_to: data.email,
       subject: `New contact from ${data.name}`,
       text: [
         `Locale: ${data.locale}`,

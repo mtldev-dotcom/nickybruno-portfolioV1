@@ -27,7 +27,6 @@ async function readMdxFile(filePath: string) {
 export type HeroContent = Awaited<ReturnType<typeof getHero>>;
 export type ServicesContent = Awaited<ReturnType<typeof getServices>>;
 export type ProjectsContent = Awaited<ReturnType<typeof getProjects>>;
-export type SiteContent = Awaited<ReturnType<typeof getSiteContent>>;
 
 export const getHero = cache(async (locale: Locale) => {
   return readJsonFile<Record<string, JsonValue>>(path.join(CONTENT_ROOT, locale, "hero.json"));

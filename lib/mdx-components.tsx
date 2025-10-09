@@ -1,7 +1,11 @@
-import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
+
+type MDXComponents = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: React.ComponentType<any>;
+};
 
 export const mdxComponents: MDXComponents = {
   h1: ({ className, ...props }) => (

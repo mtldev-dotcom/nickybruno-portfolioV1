@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 import { getHero, getProjects } from "@/lib/content";
 import { isLocale } from "@/lib/locales";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 export const contentType = "image/png";
 export const size = {
   width: 1200,
@@ -11,11 +11,11 @@ export const size = {
 };
 
 type OpenGraphImageProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function OpenGraphImage({ params }: OpenGraphImageProps) {
-  const { locale } = params;
+  const { locale } = await params;
 
   if (!isLocale(locale)) {
     return new ImageResponse(<div />, size);
