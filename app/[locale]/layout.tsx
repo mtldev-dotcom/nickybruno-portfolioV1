@@ -9,15 +9,15 @@ import { isLocale, locales } from "@/lib/locales";
 
 type LocaleLayoutProps = {
   children: ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   if (!isLocale(locale)) {
     return {};
   }
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 }
 
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
-  const { locale } = params;
+  const { locale } = await params;
 
   if (!isLocale(locale)) {
     notFound();
@@ -68,7 +68,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
       addressRegion: "QC",
       addressCountry: "CA",
     },
-    sameAs: site.footer.socials.map((social) => social.href),
+    sameAs: site.footer.socials.map((social: { href: string }) => social.href),
     knowsLanguage: ["English", "French"],
   };
 

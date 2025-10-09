@@ -8,11 +8,11 @@ import { getAboutContent } from "@/lib/content";
 import { isLocale } from "@/lib/locales";
 
 type AboutPageProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   if (!isLocale(locale)) {
     return {};
   }
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 }
 
 export default async function AboutPage({ params }: AboutPageProps) {
-  const { locale } = params;
+  const { locale } = await params;
 
   if (!isLocale(locale)) {
     notFound();

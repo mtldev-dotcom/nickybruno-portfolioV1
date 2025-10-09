@@ -10,7 +10,7 @@ type ProjectPageParams = {
 };
 
 type ProjectPageProps = {
-  params: ProjectPageParams;
+  params: Promise<ProjectPageParams>;
 };
 
 export async function generateStaticParams(): Promise<ProjectPageParams[]> {
@@ -25,7 +25,7 @@ export async function generateStaticParams(): Promise<ProjectPageParams[]> {
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const { locale, slug } = params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) {
     return {};
   }
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { locale, slug } = params;
+  const { locale, slug } = await params;
 
   if (!isLocale(locale)) {
     notFound();

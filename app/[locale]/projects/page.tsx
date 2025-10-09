@@ -6,12 +6,12 @@ import { getProjects } from "@/lib/content";
 import { isLocale } from "@/lib/locales";
 
 type ProjectsPageProps = {
-  params: { locale: string };
-  searchParams?: { category?: string };
+  params: Promise<{ locale: string }>;
+  searchParams?: Promise<{ category?: string }>;
 };
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   if (!isLocale(locale)) {
     return {};
   }
@@ -23,8 +23,9 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 }
 
 export default async function ProjectsPage({ params, searchParams }: ProjectsPageProps) {
-  const { locale } = params;
-  const categoryParam = typeof searchParams?.category === "string" ? searchParams.category : undefined;
+  const { locale } = await params;
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  const categoryParam = typeof resolvedSearchParams?.category === "string" ? resolvedSearchParams.category : undefined;
 
   if (!isLocale(locale)) {
     notFound();

@@ -11,11 +11,11 @@ import { getAboutContent, getHero, getProjects, getServices, getSiteContent } fr
 import { isLocale } from "@/lib/locales";
 
 type HomePageProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function HomePage({ params }: HomePageProps) {
-  const { locale } = params;
+  const { locale } = await params;
 
   if (!isLocale(locale)) {
     notFound();
@@ -52,10 +52,16 @@ export default async function HomePage({ params }: HomePageProps) {
         locale={locale}
         title={String(hero.title)}
         subtitle={String(hero.subtitle)}
-        primaryCta={{ label: String(hero.primaryCta?.label), href: String(hero.primaryCta?.href) }}
+        primaryCta={{ 
+          label: String((hero.primaryCta as { label?: string })?.label), 
+          href: String((hero.primaryCta as { href?: string })?.href) 
+        }}
         secondaryCta={
           hero.secondaryCta
-            ? { label: String(hero.secondaryCta.label), href: String(hero.secondaryCta.href) }
+            ? { 
+                label: String((hero.secondaryCta as { label: string }).label), 
+                href: String((hero.secondaryCta as { href: string }).href) 
+              }
             : undefined
         }
         highlights={Array.isArray(hero.highlights) ? (hero.highlights as { label: string; value: string }[]) : undefined}
@@ -91,8 +97,8 @@ export default async function HomePage({ params }: HomePageProps) {
         cta={
           services.cta
             ? {
-                label: String(services.cta.label ?? servicesCtaLabel),
-                href: String(services.cta.href ?? `/${locale}/contact`),
+                label: String((services.cta as { label?: string })?.label ?? servicesCtaLabel),
+                href: String((services.cta as { href?: string })?.href ?? `/${locale}/contact`),
               }
             : { label: servicesCtaLabel, href: `/${locale}/services` }
         }

@@ -8,11 +8,11 @@ import { getServices, getSiteContent } from "@/lib/content";
 import { isLocale } from "@/lib/locales";
 
 type ServicesPageProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   if (!isLocale(locale)) {
     return {};
   }
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 }
 
 export default async function ServicesPage({ params }: ServicesPageProps) {
-  const { locale } = params;
+  const { locale } = await params;
 
   if (!isLocale(locale)) {
     notFound();
@@ -86,7 +86,10 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
         services={Array.isArray(services.services) ? (services.services as ServiceDefinition[]) : []}
         cta={
           services.cta
-            ? { label: String(services.cta.label), href: String(services.cta.href) }
+            ? { 
+                label: String((services.cta as { label?: string })?.label), 
+                href: String((services.cta as { href?: string })?.href) 
+              }
             : { label: contactLabel, href: `/${locale}/contact` }
         }
       />
