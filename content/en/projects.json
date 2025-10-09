@@ -25,7 +25,7 @@
       "slug": "sofia-ai-desk",
       "year": 2025,
       "tags": ["AI Automation", "Operations", "Agentic Workflows"],
-      "excerpt": "Automated triage and knowledge routing for a 150-person support team, powered by retrieval-augmented agents.",
+      "excerpt": "Automated customer support with a clear dashboard — ~60% faster responses.",
       "category": "ai-automation",
       "theme": {
         "background": "radial-gradient(circle at 25% 25%, rgba(102,255,0,0.8), rgba(12,12,12,0.95))",
@@ -37,7 +37,7 @@
       "slug": "next-x-level",
       "year": 2024,
       "tags": ["Next.js", "Product Strategy", "Design Systems"],
-      "excerpt": "Rebuilt the growth marketing site with a multilingual component library, automated testing, and CMS workflows.",
+      "excerpt": "Bilingual e‑commerce with clean mobile UX and automated product updates.",
       "category": "web",
       "theme": {
         "background": "linear-gradient(140deg, rgba(8,8,8,0.95), rgba(100,255,188,0.45))",
@@ -49,7 +49,7 @@
       "slug": "lumicerra-labs",
       "year": 2023,
       "tags": ["Product Design", "IoT", "Analytics"],
-      "excerpt": "Designed and shipped a cloud dashboard for monitoring Lidar-powered logistics with predictive insights.",
+      "excerpt": "Real‑time dashboard for smart LED lighting with clear energy insights.",
       "category": "product",
       "theme": {
         "background": "linear-gradient(130deg, rgba(8,12,40,0.9), rgba(102,255,0,0.4))",

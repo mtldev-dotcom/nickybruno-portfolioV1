@@ -73,6 +73,23 @@ export type SiteContent = {
     copyright: string;
     socials: { label: string; href: string }[];
   };
+  labels?: {
+    headerCta?: string;
+    heroPill?: string;
+    footerConnect?: string;
+    projectsHeading?: string;
+    home?: {
+      highlights?: string;
+      moreProjects?: string;
+      servicesCta?: string;
+      aboutCta?: string;
+    };
+    sections?: {
+      about?: string;
+      services?: string;
+      contact?: string;
+    };
+  };
   contact: Record<string, JsonValue>;
 };
 

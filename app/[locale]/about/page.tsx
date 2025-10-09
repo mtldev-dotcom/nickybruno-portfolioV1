@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { SkillsGrid } from "@/components/skills-grid";
 import { StatsRibbon } from "@/components/stats-ribbon";
 import { Timeline } from "@/components/timeline";
-import { getAboutContent } from "@/lib/content";
+import { getAboutContent, getSiteContent } from "@/lib/content";
 import { isLocale } from "@/lib/locales";
 
 type AboutPageProps = {
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!isLocale(locale)) {
     return {};
   }
-  const about = await getAboutContent(locale);
+  const [about, site] = await Promise.all([getAboutContent(locale), getSiteContent(locale)]);
   const title = (about.frontmatter?.title as string | undefined) ?? (locale === "fr" ? "\u00C0 propos" : "About");
   const tagline =
     (about.frontmatter?.tagline as string | undefined) ??
@@ -36,7 +36,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
     notFound();
   }
 
-  const about = await getAboutContent(locale);
+  const [about, site] = await Promise.all([getAboutContent(locale), getSiteContent(locale)]);
   const frontmatter = about.frontmatter ?? {};
 
   const stats = Array.isArray(frontmatter.stats)
@@ -59,7 +59,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
         ? "Cr\u00E9er des exp\u00E9riences performantes et humaines."
         : "Building human, high-performance experiences.";
 
-  const label = locale === "fr" ? "\u00C0 propos" : "About";
+  const label = (site.labels?.sections?.about as string) ?? (locale === "fr" ? "\u00C0 propos" : "About");
 
   return (
     <div className="space-y-14">

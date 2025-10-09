@@ -18,11 +18,12 @@ type NavigationItem = {
 type SiteHeaderProps = {
   locale: Locale;
   navigation: NavigationItem[];
+  primaryCtaLabel?: string;
 };
 
-export function SiteHeader({ locale, navigation }: SiteHeaderProps) {
+export function SiteHeader({ locale, navigation, primaryCtaLabel }: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const ctaLabel = locale === "fr" ? "Discutons" : "Let\u2019s talk";
+  const ctaLabel = primaryCtaLabel ?? (locale === "fr" ? "Discutons" : "Let\u2019s talk");
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-black backdrop-blur-md backdrop-saturate-[180%]">

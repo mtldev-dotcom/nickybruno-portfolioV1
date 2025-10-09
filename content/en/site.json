@@ -1,71 +1,65 @@
 {
   "meta": {
-    "title": "Nicky Bruno — Developer, Designer & AI Automation Expert",
-    "description": "Montreal-based developer and designer helping teams ship performant products, multilingual websites, and AI automations.",
+    "title": "Nicky Bruno — Web, Design & Automation Expert",
+    "description": "Helping Canadian businesses modernize their websites, automate their workflows, and grow with smart, creative digital systems.",
     "keywords": [
-      "Next.js developer",
-      "AI automation expert",
-      "bilingual product designer",
-      "Montreal tech consultant"
+      "web design",
+      "automation",
+      "AI assistant",
+      "branding",
+      "consultant",
+      "Montreal"
     ],
     "author": "Nicky Bruno",
     "siteName": "nickybruno.com"
   },
   "navigation": [
-    {
-      "label": "Work",
-      "href": "/en/projects"
-    },
-    {
-      "label": "Services",
-      "href": "/en/services"
-    },
-    {
-      "label": "About",
-      "href": "/en/about"
-    },
-    {
-      "label": "Contact",
-      "href": "/en/contact"
-    }
+    { "label": "Work", "href": "/en/projects" },
+    { "label": "Services", "href": "/en/services" },
+    { "label": "About", "href": "/en/about" },
+    { "label": "Contact", "href": "/en/contact" }
   ],
   "footer": {
     "copyright": "© {{year}} Nicky Bruno. All rights reserved.",
     "socials": [
-      {
-        "label": "LinkedIn",
-        "href": "https://www.linkedin.com/in/nickybruno/"
-      },
-      {
-        "label": "GitHub",
-        "href": "https://github.com/nickybruno"
-      },
-      {
-        "label": "Dribbble",
-        "href": "https://dribbble.com/nickybruno"
-      }
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/nickybruno/" },
+      { "label": "GitHub", "href": "https://github.com/nickybruno" },
+      { "label": "Dribbble", "href": "https://dribbble.com/nickybruno" }
     ]
   },
+  "labels": {
+    "headerCta": "Let\u2019s talk",
+    "heroPill": "Digital Studio",
+    "footerConnect": "Connect",
+    "projectsHeading": "Case Studies",
+    "home": {
+      "highlights": "Highlights",
+      "moreProjects": "View all projects",
+      "servicesCta": "See services",
+      "aboutCta": "Explore full journey"
+    },
+    "sections": {
+      "about": "About",
+      "services": "Services",
+      "contact": "Contact"
+    }
+  },
   "contact": {
-    "title": "Tell me about your next launch",
-    "description": "Share where you are today and where you want to go next. I usually reply within one business day.",
+    "sectionLabel": "Collaborate",
+    "title": "Let\u2019s make your digital life easier.",
+    "description": "Tell me what you want to achieve \u2014 I\u2019ll show you the smartest, simplest way to make it happen.",
     "form": {
       "nameLabel": "Full name",
       "emailLabel": "Work email",
       "companyLabel": "Company or team",
       "projectLabel": "What would you like to build?",
       "budgetLabel": "Budget range",
-      "budgetOptions": [
-        "Under $10k",
-        "$10k – $25k",
-        "$25k – $50k",
-        "$50k+"
-      ],
+      "budgetOptions": ["Under $10k", "$10k \u2013 $25k", "$25k \u2013 $50k", "$50k+"],
       "submitLabel": "Send message"
     },
     "success": {
       "title": "Thank you!",
-      "description": "Your message was sent. I’ll be in touch very soon."
+      "description": "Your message was sent. I\u2019ll be in touch very soon."
     },
     "error": {
       "title": "Something went wrong",

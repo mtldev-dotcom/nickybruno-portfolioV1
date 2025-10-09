@@ -20,10 +20,11 @@ type HeroProps = {
   secondaryCta?: HeroCta;
   highlights?: HeroHighlight[];
   locale: string;
+  pillLabel?: string;
 };
 
-export function Hero({ title, subtitle, primaryCta, secondaryCta, highlights = [], locale }: HeroProps) {
-  const studioLabel = locale === "fr" ? "Studio num\u00E9rique" : "Digital Studio";
+export function Hero({ title, subtitle, primaryCta, secondaryCta, highlights = [], locale, pillLabel }: HeroProps) {
+  const studioLabel = pillLabel ?? (locale === "fr" ? "Studio num\u00E9rique" : "Digital Studio");
 
   return (
     <section className="relative overflow-hidden rounded-3xl border border-border/60 bg-card px-6 py-16 shadow-[0_10px_80px_-40px_rgba(102,255,0,0.55)] sm:px-10 md:px-16 md:py-24">

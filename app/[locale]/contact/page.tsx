@@ -14,11 +14,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!isLocale(locale)) {
     return {};
   }
-  const heading = locale === "fr" ? "Travaillons ensemble" : "Let\u2019s build together";
-  const description =
-    locale === "fr"
-      ? "Partagez vos objectifs produits, vos d\u00E9fis d’automatisation ou votre besoin d’accompagnement. Je r\u00E9ponds rapidement pour planifier un appel de d\u00E9couverte."
-      : "Share your product goals, automation challenges, or the type of partnership you need. I respond quickly to schedule a discovery call.";
+  const site = await getSiteContent(locale);
+  const contact = site.contact as ContactCopy;
+  const heading = contact.title as string;
+  const description = contact.description as string;
   return {
     title: `${heading} \u2014 Nicky Bruno`,
     description,
@@ -35,17 +34,14 @@ export default async function ContactPage({ params }: ContactPageProps) {
   const site = await getSiteContent(locale);
   const contactCopy = site.contact as ContactCopy;
 
-  const heading = locale === "fr" ? "Travaillons ensemble" : "Let\u2019s build together";
-  const description =
-    locale === "fr"
-      ? "Partagez vos objectifs produits, vos d\u00E9fis d’automatisation ou votre besoin d’accompagnement. Je r\u00E9ponds rapidement pour planifier un appel de d\u00E9couverte."
-      : "Share your product goals, automation challenges, or the type of partnership you need. I respond quickly to schedule a discovery call.";
+  const heading = contactCopy.title as string;
+  const description = contactCopy.description as string;
 
   return (
     <div className="space-y-10">
       <header className="space-y-4">
         <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
-          {locale === "fr" ? "Contact" : "Contact"}
+          {(site.labels?.sections?.contact as string) ?? (locale === "fr" ? "Contact" : "Contact")}
         </span>
         <h1 className="text-4xl font-semibold tracking-tight text-balance md:text-5xl">{heading}</h1>
         <p className="max-w-2xl text-base text-muted-foreground md:text-lg">{description}</p>

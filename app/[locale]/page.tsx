@@ -40,16 +40,17 @@ export default async function HomePage({ params }: HomePageProps) {
   const projectsToShow = projects.projects.slice(0, 3);
   const contactCopy = site.contact as ContactCopy;
 
-  const moreProjectsLabel = locale === "fr" ? "Voir tous les projets" : "View all projects";
-  const servicesCtaLabel = locale === "fr" ? "Voir les services" : "See services";
-  const aboutCtaLabel = locale === "fr" ? "Explorer le parcours complet" : "Explore full journey";
-  const highlightLabel = locale === "fr" ? "S\u00E9lection" : "Highlights";
+  const moreProjectsLabel = (site.labels?.home?.moreProjects as string) ?? (locale === "fr" ? "Voir tous les projets" : "View all projects");
+  const servicesCtaLabel = (site.labels?.home?.servicesCta as string) ?? (locale === "fr" ? "Voir les services" : "See services");
+  const aboutCtaLabel = (site.labels?.home?.aboutCta as string) ?? (locale === "fr" ? "Explorer le parcours complet" : "Explore full journey");
+  const highlightLabel = (site.labels?.home?.highlights as string) ?? (locale === "fr" ? "S\u00E9lection" : "Highlights");
   const aboutTitleFallback = locale === "fr" ? "\u00C0 propos" : "About";
 
   return (
     <div className="flex flex-col gap-16">
       <Hero
         locale={locale}
+        pillLabel={site.labels?.heroPill}
         title={String(hero.title)}
         subtitle={String(hero.subtitle)}
         primaryCta={{ 

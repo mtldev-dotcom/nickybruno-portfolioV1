@@ -11,10 +11,11 @@ type SiteFooterProps = {
   locale: Locale;
   copyright: string;
   socials: Social[];
+  connectLabel?: string;
 };
 
-export function SiteFooter({ locale, copyright, socials }: SiteFooterProps) {
-  const localizedLabel = locale === "fr" ? "Contact direct" : "Connect";
+export function SiteFooter({ locale, copyright, socials, connectLabel }: SiteFooterProps) {
+  const localizedLabel = connectLabel ?? (locale === "fr" ? "Contact direct" : "Connect");
   const renderedCopyright = copyright.replace(
     "{{year}}",
     new Date().getFullYear().toString(),

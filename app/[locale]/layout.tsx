@@ -74,12 +74,12 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <SiteHeader locale={locale} navigation={site.navigation} />
+      <SiteHeader locale={locale} navigation={site.navigation} primaryCtaLabel={site.labels?.headerCta} />
       <main className="flex-1 bg-[radial-gradient(circle_at_top,_rgba(102,255,0,0.04),_transparent_60%)]">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 py-12 sm:px-10 md:py-20">{children}</div>
       </main>
-      <SiteFooter locale={locale} copyright={site.footer.copyright} socials={site.footer.socials} />
+      <SiteFooter locale={locale} copyright={site.footer.copyright} socials={site.footer.socials} connectLabel={site.labels?.footerConnect} />
     </div>
   );
 }

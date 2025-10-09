@@ -1,38 +1,69 @@
 {
-  "title": "What I Do",
-  "intro": "Pairing product strategy with technical execution to launch performant, human-centered experiences.",
-  "services": [
+  "title": "Services",
+  "intro": "Every engagement blends strategy, design, and technology — focused on saving you time, boosting visibility, and building trust.",
+  "service_gridTitle": [
     {
-      "name": "AI Automation Sprints",
-      "description": "Map high-impact workflows, connect data, and automate operations with bespoke AI tooling.",
-      "deliverables": [
-        "Workflow audit & opportunity report",
-        "Custom GPT or agent build-out",
-        "Systems integration & training"
-      ],
-      "badge": "4-week program"
-    },
-    {
-      "name": "Web Experience Design & Build",
-      "description": "Design systems, prototypes, and ship production-ready interfaces using modern frameworks.",
-      "deliverables": [
-        "Interactive prototypes & design tokens",
-        "Responsive Next.js implementation",
-        "Performance & accessibility instrumentation"
-      ],
-      "badge": "Design + Dev"
-    },
-    {
-      "name": "Technical Partnerships",
-      "description": "Long-term engagements to evolve products, maintain infrastructure, and coach internal teams.",
-      "deliverables": [
-        "Roadmap & backlog stewardship",
-        "Feature delivery & QA automation",
-        "Team mentoring & knowledge base"
-      ],
-      "badge": "Fractional"
+      "title": "What I Do",
+      "intro": "Pairing product strategy with technical execution to launch performant, human-centered experiences."
     }
   ],
+  "services": [
+    {
+      "name": "Digital Foundations",
+      "description": "Custom websites with professional visuals, simple editing, and multilingual support.",
+      "deliverables": [
+        "Responsive, mobile-first design",
+        "English/French localization",
+        "Simple editing via CMS or MDX",
+        "Built-in analytics and SEO setup"
+      ],
+      "badge": "Web"
+    },
+    {
+      "name": "Automation & Efficiency",
+      "description": "Save time and reduce repetitive work with smart, connected workflows.",
+      "deliverables": [
+        "Workflow setup (n8n, Zapier, Google)",
+        "AI chat assistants for FAQs",
+        "Document & email automation",
+        "App integrations (CRM, forms, sheets)"
+      ],
+      "badge": "Ops"
+    },
+    {
+      "name": "Branding & Graphic Design",
+      "description": "Clear, modern brand systems that look consistent everywhere.",
+      "deliverables": [
+        "Logo, color palette, typography",
+        "Business cards and social templates",
+        "Packaging and event collateral",
+        "Print-ready files"
+      ],
+      "badge": "Design"
+    },
+    {
+      "name": "Consulting & Training",
+      "description": "Clarity before investment and confidence after launch.",
+      "deliverables": [
+        "Tool selection and hosting guidance",
+        "Roadmap and pilot planning",
+        "Team training and workshops",
+        "Ongoing coaching"
+      ],
+      "badge": "Advisory"
+    }
+  ],
+  "collaboration": {
+    "heading": "Collaboration approach",
+    "copy": "Every engagement starts with understanding your goals, audiences, and constraints. We co-create a clear roadmap, then deliver in focused iterations with continuous performance instrumentation.",
+    "bullets": [
+      "Discovery workshops and critical workflow mapping",
+      "Interactive prototypes to align stakeholders",
+      "Incremental delivery with weekly reviews",
+      "Performance and accessibility instrumentation from day one"
+    ],
+    "ctaLabel": "Discuss a project"
+  },
   "cta": {
     "label": "Start a project",
     "href": "/en/contact"

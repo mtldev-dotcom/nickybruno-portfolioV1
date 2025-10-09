@@ -47,34 +47,57 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
         ? "Solutions sur mesure en design, d\u00E9veloppement et automatisation IA."
         : "Tailored design, engineering, and automation services.";
 
-  const contactLabel = locale === "fr" ? "Discuter d'un projet" : "Discuss a project";
+  const collab =
+    (services.collaboration as {
+      heading?: string;
+      copy?: string;
+      bullets?: string[];
+      ctaLabel?: string;
+    } | undefined);
 
-  const collaborationHeading = locale === "fr" ? "Approche de collaboration" : "Collaboration approach";
+  const contactLabel =
+    typeof collab?.ctaLabel === "string"
+      ? collab.ctaLabel
+      : locale === "fr"
+        ? "Discuter d'un projet"
+        : "Discuss a project";
+
+  const collaborationHeading =
+    typeof collab?.heading === "string"
+      ? collab.heading
+      : locale === "fr"
+        ? "Approche de collaboration"
+        : "Collaboration approach";
+
   const collaborationCopy =
-    locale === "fr"
-      ? "Chaque mandat commence par une compr\u00E9hension fine de vos objectifs, de vos utilisatrices et utilisateurs et de vos contraintes. Nous co-construisons une feuille de route claire, puis livrons par it\u00E9rations rapides avec instrumentation continue de la performance."
-      : "Every engagement starts with understanding your goals, audiences, and constraints. We co-create a clear roadmap, then deliver in focused iterations with continuous performance instrumentation.";
+    typeof collab?.copy === "string"
+      ? collab.copy
+      : locale === "fr"
+        ? "Chaque mandat commence par une compr\u00E9hension fine de vos objectifs, de vos utilisatrices et utilisateurs et de vos contraintes. Nous co-construisons une feuille de route claire, puis livrons par it\u00E9rations rapides avec instrumentation continue de la performance."
+        : "Every engagement starts with understanding your goals, audiences, and constraints. We co-create a clear roadmap, then deliver in focused iterations with continuous performance instrumentation.";
 
   const collaborationBullets =
-    locale === "fr"
-      ? [
-          "Ateliers de d\u00E9couverte et cartographie des flux critiques",
-          "Prototypes interactifs pour aligner les parties prenantes",
-          "Livraison incr\u00E9mentale avec revues hebdomadaires",
-          "Instrumentation performance et accessibilit\u00E9 d\u00E8s le d\u00E9part",
-        ]
-      : [
-          "Discovery workshops and critical workflow mapping",
-          "Interactive prototypes to align stakeholders",
-          "Incremental delivery with weekly reviews",
-          "Performance and accessibility instrumentation from day one",
-        ];
+    Array.isArray(collab?.bullets) && collab!.bullets.length > 0
+      ? collab!.bullets
+      : locale === "fr"
+        ? [
+            "Ateliers de d\u00E9couverte et cartographie des flux critiques",
+            "Prototypes interactifs pour aligner les parties prenantes",
+            "Livraison incr\u00E9mentale avec revues hebdomadaires",
+            "Instrumentation performance et accessibilit\u00E9 d\u00E8s le d\u00E9part",
+          ]
+        : [
+            "Discovery workshops and critical workflow mapping",
+            "Interactive prototypes to align stakeholders",
+            "Incremental delivery with weekly reviews",
+            "Performance and accessibility instrumentation from day one",
+          ];
 
   return (
     <div className="space-y-14">
       <header className="space-y-6">
         <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
-          {locale === "fr" ? "Offre" : "Services"}
+          {(site.labels?.sections?.services as string) ?? (locale === "fr" ? "Offre" : "Services")}
         </span>
         <h1 className="text-4xl font-semibold tracking-tight text-balance md:text-5xl">{title}</h1>
         <p className="max-w-3xl text-base text-muted-foreground md:text-lg">{intro}</p>

@@ -6,6 +6,7 @@ import type { ContactPayload } from "@/lib/schemas/contact";
 import { contactSchema } from "@/lib/schemas/contact";
 
 export type ContactCopy = {
+  sectionLabel?: string;
   title: string;
   description: string;
   form: {
@@ -92,7 +93,7 @@ export function ContactForm({ locale, copy }: ContactFormProps) {
     <section className="rounded-3xl border border-border/60 bg-card/80 px-6 py-10 shadow-[0_30px_90px_-60px_rgba(102,255,0,0.6)] sm:px-10 md:px-12 md:py-14">
       <div className="max-w-2xl space-y-4">
         <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
-          {locale === "fr" ? "Collaborons" : "Collaborate"}
+          {copy.sectionLabel ?? (locale === "fr" ? "Collaborons" : "Collaborate")}
         </span>
         <h2 className="text-3xl font-semibold tracking-tight text-balance md:text-4xl">{copy.title}</h2>
         <p className="text-base text-muted-foreground md:text-lg">{copy.description}</p>

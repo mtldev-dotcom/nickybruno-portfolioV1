@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ProjectGallery } from "@/components/project-gallery";
-import { getProjects } from "@/lib/content";
+import { getProjects, getSiteContent } from "@/lib/content";
 import { isLocale } from "@/lib/locales";
 
 type ProjectsPageProps = {
@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!isLocale(locale)) {
     return {};
   }
-  const listing = await getProjects(locale);
+  const [listing, site] = await Promise.all([getProjects(locale), getSiteContent(locale)]);
   return {
     title: `${listing.title} — Nicky Bruno`,
     description: listing.intro,
@@ -31,13 +31,13 @@ export default async function ProjectsPage({ params, searchParams }: ProjectsPag
     notFound();
   }
 
-  const listing = await getProjects(locale);
+  const [listing, site] = await Promise.all([getProjects(locale), getSiteContent(locale)]);
 
   const activeFilter = listing.filters?.some((filter) => filter.key === categoryParam)
     ? categoryParam
     : undefined;
 
-  const heading = locale === "fr" ? "\u00C9tudes de cas" : "Case Studies";
+  const heading = (site.labels?.projectsHeading as string) ?? (locale === "fr" ? "\u00C9tudes de cas" : "Case Studies");
 
   return (
     <div className="space-y-10">

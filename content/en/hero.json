@@ -1,25 +1,25 @@
 {
-  "title": "Design • Code • Automation",
-  "subtitle": "Building fast, bilingual experiences powered by AI.",
+  "title": "I build digital systems that make your business run smoother — and look good doing it.",
+  "subtitle": "From websites and automation to design and marketing — I help you work smarter, not harder.",
   "primaryCta": {
     "label": "See my work",
     "href": "/en/projects"
   },
   "secondaryCta": {
-    "label": "Book a discovery call",
+    "label": "Let\u2019s talk",
     "href": "mailto:hello@nickybruno.com"
   },
   "highlights": [
     {
-      "label": "Years shipping digital products",
-      "value": "12+"
+      "label": "years in creative & tech industries",
+      "value": "20+"
     },
     {
-      "label": "Projects launched",
+      "label": "completed projects across Canada",
       "value": "80+"
     },
     {
-      "label": "Automation hours saved",
+      "label": "hours saved through automation",
       "value": "4,000+"
     }
   ]
