@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { FloatingDockRoot } from "@/components/floating-dock-root";
 import { getSiteContent } from "@/lib/content";
 import { isLocale, locales } from "@/lib/locales";
 
@@ -80,6 +81,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 py-12 sm:px-10 md:py-20">{children}</div>
       </main>
       <SiteFooter locale={locale} copyright={site.footer.copyright} socials={site.footer.socials} connectLabel={site.labels?.footerConnect} />
+      <FloatingDockRoot locale={locale} />
     </div>
   );
 }
