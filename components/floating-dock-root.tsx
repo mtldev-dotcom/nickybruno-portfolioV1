@@ -3,6 +3,7 @@
 import { FloatingDock } from "@/components/ui/floating-dock";
 import {
   IconHome,
+  IconFolders,
   IconBriefcase,
   IconUser,
   IconMail,
@@ -20,6 +21,13 @@ export function FloatingDockRoot({ locale }: FloatingDockRootProps) {
         <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
       href: `/${locale}`,
+    },
+    {
+      title: locale === "fr" ? "Projets" : "Work",
+      icon: (
+        <IconFolders className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
+      href: `/${locale}/projects`,
     },
     {
       title: locale === "fr" ? "Services" : "Services",
