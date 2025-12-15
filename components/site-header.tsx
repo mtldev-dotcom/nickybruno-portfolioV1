@@ -8,7 +8,7 @@ import type { Locale } from "@/lib/locales";
 import { locales } from "@/lib/locales";
 
 import { LanguageToggle } from "./language-toggle";
-import { SiteLogo } from "./site-logo";
+import Wordmark from "./wordmark";
 import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 
 type NavigationItem = {
@@ -28,11 +28,36 @@ export function SiteHeader({ locale, navigation, primaryCtaLabel }: SiteHeaderPr
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background">
-      <div className="mx-auto flex max-w-9/10 items-center justify-between gap-6 px-6 py-0 sm:px-10">
-        <SiteLogo locale={locale} variant="auto" />
-        
-        
-        <div className="flex items-center py-5 gap-3">
+      <div className="mx-auto flex h-14 max-w-9/10 items-center justify-between gap-6 px-6 sm:px-10">
+        {/* <Link
+          href={`/${locale}`}
+          className="group inline-flex h-full items-center gap-3 transition"
+          aria-label="Nicky Bruno - Home"
+        >
+          <Wordmark
+            text="NICKY BRUNO"
+            accent="#7BFF00"
+            compact
+            showSparkles={true}
+            showLine={true}
+            className="select-none shrink-0"
+          />
+        </Link> */}
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="inline-flex h-12 w-12 items-center justify-center border border-border/100 border-white text-muted-foreground font-bold transition hover:bg-primary/10 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? (
+              <X className="h-7 w-7 text-white" strokeWidth={3} />
+            ) : (
+              <Menu className="h-9 w-9 text-white" strokeWidth={2} strokeLinejoin="miter"/>
+            )}
+          </button>
+                  
+        <div className="flex items-center py-0 gap-3">
           <LanguageToggle locale={locale} availableLocales={[...locales]} />
           <AnimatedThemeToggler className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition hover:bg-primary/10 hover:text-foreground hover:shadow-[0_0_12px_rgba(var(--brand-blue),0.35),0_0_10px_rgba(var(--brand-green),0.3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" />
           
@@ -44,15 +69,7 @@ export function SiteHeader({ locale, navigation, primaryCtaLabel }: SiteHeaderPr
             {ctaLabel}
           </Link>
           
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition hover:bg-primary/10 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
-          >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+
         </div>
       </div>
       
